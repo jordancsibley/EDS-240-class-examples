@@ -1,0 +1,15 @@
+---
+title: "Week 1 discussion: Data Wrangling"
+author: "Jordan Sibley"
+date: "2025-01-07"
+format: html
+---
+
+## Load packages 
+```{r}
+library(tidyverse)
+library(janitor)
+library(here)
+library(usdata)
+```
+
