@@ -1,0 +1,78 @@
+---
+title: "Week 3 Discussion: Exercise"
+subtitle: "Writing alt text"
+format: html
+date: 2025/01/21
+editor_options: 
+  chunk_output_type: console
+---
+
+#### What is alt text?
+
+**Formula for writing alt-text**
+
+alt=“*Chart type* of *type of data* where *reason for including chart*."
+
+-   Write in sentence case, but keep it short
+-   Careful consider the use of special characters
+-   Link to the data or source
+
+#### What to include for your plot
+
+-   Include both a figure caption and alt text.
+-   The figure caption shows up in the rendered version and serves to provide additional information and context
+
+#### Adding alt text
+
+-   If you’re rendering ggplot (or other data visualization) code within a `.qmd` file, add the `fig-alt` code chunk option:
+-   If you’ve save your data visualization as an image file, you can embed it in a .qmd file using either **markdown** or **html** syntax:
+
+Markdown
+
+```         
+![Figure caption goes here](file/path/to/image){fig-alt="Alt text goes here"}
+```
+
+HTML
+
+```         
+<img src="file/path/to/image" alt="Alt text goes here">
+```
+
+## Example 1: `palmerpenguins` ggplot
+
+1.  Copy the following code into your week3-discussion.qmd file and add code chunk options that:
+
+-   render the output (i.e. plot), but not the code
+-   suppress any warnings or messages
+
+2.  Add alt text using the fig-alt: code chunk option
+3.  “Inspect” your plot (right click > Inspect) to verify that the alt attribute and text is added to the HTML
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+#| fig-alt: "Stacked histogram displaying frequency of body mass (in grams) of three different species of penguin where Gentoo has the highest average body mass over Adelie and Chinstrap species by X grams (~ 1000 g)"
+
+
+library(ggplot2)
+library(palmerpenguins)
+
+ggplot(data = penguins, aes(x = body_mass_g, fill = species)) +
+  geom_histogram(alpha = 0.5, 
+                 position = "identity") +
+  scale_fill_manual(values = c("darkorange","purple","cyan4")) +
+  labs(x = "Body mass (g)",
+       y = "Frequency",
+       title = "Penguin body masses")
+```
+
+## Example 2 (from The New York Times): 
+
+![](nyt-monthly-temp.png){fig-alt="A dot plot of monthly global temperature compared with average for the 20th century spanning from the year 1950 to 2023 where values below the average are colored blue and values above the average are colored red where the overall trend over time is a shift from below average temperatures to strictly above average temperatures begining in 1975. Each year is represented by 12 dots, one for each month and series of record hot months are highlighted around 2020 to 2023. "}
+
+
+## Example 3 (Fig 1A from Chapman et al. 2024):
+
+<img src="chapman-etal-2024.png" alt="A heat map of more than 2.6 billion global species observations from the Global Biodiversity Information Facility database where species observations are disproportionately from high income countries, particularly North America and European countries" width="700px">
